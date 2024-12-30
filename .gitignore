@@ -1,5 +1,10 @@
 /backend/venv/
 /web/node_modules/
+/mobile/node_modules/
+/mobile/android/
+/mobile/ios/
+/mobile/.bundle/
+/mobile/.vscode/
 .env
 __pycache__/
 *.pyc
