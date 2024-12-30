@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';  // Adjust the URL for your backend
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';  // Adjust the URL for backend
 
 export const registerUser = async (userData) => {
   try {
