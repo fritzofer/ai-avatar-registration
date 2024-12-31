@@ -5,6 +5,18 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
+// Use the environment variable PORT if set, otherwise fallback to 8080
+const port = process.env.PORT || 8080;
+
+// Get the OpenAI API key from the environment variables (set in Azure Configuration)
+const openaiApiKey = process.env.OPENAI_API_KEY;
+if (!openaiApiKey) {
+  console.error("OpenAI API key is not set in the environment variables.");
+  process.exit(1); // Exit the process if API key is not available
+}
+
+console.log("API Key is set correctly in the environment variable.");
+
 app.get('/random-message', async (req, res) => {
   try {
     const openAIResponse = await axios.post(
@@ -15,7 +27,7 @@ app.get('/random-message', async (req, res) => {
       },
       {
         headers: {
-          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+          'Authorization': `Bearer ${openaiApiKey}`,
           'Content-Type': 'application/json',
         },
       }
@@ -29,7 +41,6 @@ app.get('/random-message', async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 8181;
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
