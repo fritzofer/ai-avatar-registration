@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { SafeAreaView, ScrollView, StatusBar, TextInput, TouchableOpacity, Text, Alert, View, useColorScheme, Image } from 'react-native';
-import axios from 'axios'; // Import Axios
+import { SafeAreaView, ScrollView, StatusBar, TextInput, TouchableOpacity, Text, Alert, ToastAndroid, View, useColorScheme, Image } from 'react-native';
+import axios from 'axios';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import styles from './RegistrationScreen'; // Import the styling
+import styles from './RegistrationScreen'; 
 
 const RegistrationScreen = (): React.JSX.Element => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState(''); // Add confirmation password state
+  const [confirmPassword, setConfirmPassword] = useState(''); 
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -39,7 +39,23 @@ const RegistrationScreen = (): React.JSX.Element => {
 
       // Handle success
       if (response.status === 201) {
-        Alert.alert('Success', 'Registration Successful!');
+        
+        try {
+          const messageResponse = await axios.get('http://10.0.2.2:3000/random-message');
+          const randomMessage = messageResponse.data.message;
+      
+          // Concatenate "Registration Successful!" with the random message
+          const toastMessage = `Registration Successful!\n${randomMessage}`;
+      
+          // Show the Toast message (with a larger font)
+          ToastAndroid.showWithGravity(
+              toastMessage,
+              ToastAndroid.LONG,
+              ToastAndroid.CENTER
+          );
+      } catch (error) {
+          console.error('Error fetching random message:', error);
+      }
       }
     } catch (error) {
       // Handle error

@@ -16,7 +16,7 @@ def home():
 def register():
     data = request.get_json()
 
-    # Validate input (basic example)
+    # Validate input
     if not data.get("username") or not data.get("email") or not data.get("password"):
         return jsonify({"error": "Missing required fields"}), 400
 

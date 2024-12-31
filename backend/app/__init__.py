@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from flask import Flask
 from pymongo import MongoClient
-from app.routes import main  # Import the blueprint
+from app.routes import main
 
 def create_app():
     app = Flask(__name__)
@@ -16,9 +16,9 @@ def create_app():
     client = MongoClient(mongo_uri)
 
     # Access the database
-    app.mongo = client.get_database("my_database")  # Specify your database name explicitly
+    app.mongo = client.get_database("my_database")
 
-    # Ensure the collection exists by inserting a sample document (optional, for setup)
+    # Ensure the collection exists by inserting a sample document
     if "users" not in app.mongo.list_collection_names():
         app.mongo["users"].insert_one({"setup": "initialization"})
 

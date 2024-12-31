@@ -1,37 +1,40 @@
 const express = require('express');
 const axios = require('axios');
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+const cors = require('cors');
 
 const app = express();
-const port = process.env.PORT || 5000;
+app.use(cors());
+const port = 3000;
 
-// Middleware to handle JSON requests
-app.use(express.json());
+console.log("API Key:", process.env.OPENAI_API_KEY);
 
-// API endpoint to fetch random message
+
 app.get('/random-message', async (req, res) => {
   try {
-    const response = await axios.post(
-      'https://api.openai.com/v1/completions',
+    const openAIResponse = await axios.post(
+      'https://api.openai.com/v1/chat/completions',
       {
-        model: 'text-davinci-003',
-        prompt: 'Give me a random motivational message.',
-        max_tokens: 50,
+        model: 'gpt-3.5-turbo',
+        messages: [{ role: 'user', content: 'Give me a random motivational message.' }],
       },
       {
         headers: {
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+          'Content-Type': 'application/json',
         },
       }
     );
 
-    const message = response.data.choices[0].text.trim();
+    const message = openAIResponse.data.choices[0].message.content;
     res.status(200).json({ message });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Failed to fetch message from OpenAI' });
   }
 });
 
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
