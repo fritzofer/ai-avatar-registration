@@ -5,6 +5,8 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
+console.log("Server is running...");
+
 // Use the environment variable PORT if set, otherwise fallback to 8080
 const port = process.env.PORT || 8080;
 
