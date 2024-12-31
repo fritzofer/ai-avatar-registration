@@ -47,4 +47,6 @@ This project is designed to provide a comprehensive registration system for an A
 
 ## Screenshots
 _Add screenshots of the registration system here._
+![Screenshot (83)](https://github.com/user-attachments/assets/875d9097-99ad-41a9-a535-3e8b5220fdb6)
+![Screenshot (86)](https://github.com/user-attachments/assets/d54ab1a1-659c-4837-9ca2-acb2298d61be)
 
