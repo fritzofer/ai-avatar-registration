@@ -5,10 +5,9 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
-console.log(`Server running on http://0.0.0.0:${port}`);
-
 const port = process.env.PORT || 8181;
 
+console.log(`Attempting to start server on http://0.0.0.0:${port}`);
 
 const openaiApiKey = process.env.OPENAI_API_KEY;
 if (!openaiApiKey) {
@@ -18,7 +17,7 @@ if (!openaiApiKey) {
 
 console.log("API Key is set correctly in the environment variable.");
 
-app.get('/random-message', async (req, res) => {
+app.get('/random-message', async (_, res) => { 
   try {
     const openAIResponse = await axios.post(
       'https://api.openai.com/v1/chat/completions',
@@ -43,5 +42,5 @@ app.get('/random-message', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server started successfully on http://0.0.0.0:${port}`);
 });
