@@ -5,12 +5,11 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
-console.log("Server is running...");
+console.log(`Server running on http://0.0.0.0:${port}`);
 
-// Use the environment variable PORT if set, otherwise fallback to 8080
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8181;
 
-// Get the OpenAI API key from the environment variables (set in Azure Configuration)
+
 const openaiApiKey = process.env.OPENAI_API_KEY;
 if (!openaiApiKey) {
   console.error("OpenAI API key is not set in the environment variables.");
