@@ -5,7 +5,6 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
-// Define the route before the app starts listening
 app.get('/random-message', async (req, res) => {
   try {
     const openAIResponse = await axios.post(
@@ -30,7 +29,6 @@ app.get('/random-message', async (req, res) => {
   }
 });
 
-// Now start listening after the routes are defined
 const port = process.env.PORT || 8181;
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
