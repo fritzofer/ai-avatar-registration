@@ -6,10 +6,11 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors());
-const port = 3000;
+
+// Use the environment variable PORT if set, otherwise fallback to 8080
+const port = process.env.PORT || 8080;
 
 console.log("API Key:", process.env.OPENAI_API_KEY);
-
 
 app.get('/random-message', async (req, res) => {
   try {
