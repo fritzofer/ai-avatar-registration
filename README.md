@@ -36,15 +36,11 @@ This project is designed to provide a comprehensive registration system for an A
    ```bash
    git clone
    ```
-2. Navigate to the root directory:
-   ```bash
-   cd [project-root]
-   ```
-3. Install dependencies:
+2. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-4. The backend is running on an Azure server but you can run the Flask app locally:
+3. The backend is running on an Azure server but you can run the Flask app locally:
    ```bash
    python backend/main.py
    ```
