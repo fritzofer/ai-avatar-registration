@@ -34,7 +34,7 @@ This project is designed to provide a comprehensive registration system for an A
 ## Setup
 1. Clone the repository:
    ```bash
-   git clone [repository-url]
+   git clone
    ```
 2. Navigate to the root directory:
    ```bash
