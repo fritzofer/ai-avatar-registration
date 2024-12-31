@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';  // Adjust the URL for backend
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://ai-avatar-backend-bjf3htefc7gac8cg.canadacentral-01.azurewebsites.net';
 
 export const registerUser = async (userData) => {
   try {

@@ -3,9 +3,11 @@ from dotenv import load_dotenv
 from flask import Flask
 from pymongo import MongoClient
 from app.routes import main
+from flask_cors import CORS
 
 def create_app():
     app = Flask(__name__)
+    CORS(app, origins=["http://localhost:3000", "https://my-production-frontend.com"])
 
     # MongoDB Connection URI
     load_dotenv()

@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
-import { SafeAreaView, ScrollView, StatusBar, TextInput, TouchableOpacity, Text, Alert, ToastAndroid, View, useColorScheme, Image } from 'react-native';
-import axios from 'axios';
+import { SafeAreaView, ScrollView, StatusBar, TextInput, TouchableOpacity, Text, Alert, View, useColorScheme, Image } from 'react-native';
+import axios from 'axios'; // Import Axios
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import styles from './RegistrationScreen'; 
-
+import styles from './RegistrationScreen'; // Import the styling
 const RegistrationScreen = (): React.JSX.Element => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState(''); 
+  const [confirmPassword, setConfirmPassword] = useState(''); // Add confirmation password state
   const isDarkMode = useColorScheme() === 'dark';
-
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-
   // Handle Registration
   const handleRegister = async () => {
     // Basic Validation
@@ -22,40 +19,21 @@ const RegistrationScreen = (): React.JSX.Element => {
       Alert.alert('Error', 'Please fill in all fields');
       return;
     }
-
     // Password Confirmation Check
     if (password !== confirmPassword) {
       Alert.alert('Error', 'Passwords do not match');
       return;
     }
-
     try {
       // Sending POST request to the backend
-      const response = await axios.post('http://10.0.2.2:5000/register', {
+      const response = await axios.post('https://ai-avatar-backend-bjf3htefc7gac8cg.canadacentral-01.azurewebsites.net/register', {
         username,
         email,
         password,
       });
-
       // Handle success
       if (response.status === 201) {
-        
-        try {
-          const messageResponse = await axios.get('http://10.0.2.2:3000/random-message');
-          const randomMessage = messageResponse.data.message;
-      
-          // Concatenate "Registration Successful!" with the random message
-          const toastMessage = `Registration Successful!\n${randomMessage}`;
-      
-          // Show the Toast message (with a larger font)
-          ToastAndroid.showWithGravity(
-              toastMessage,
-              ToastAndroid.LONG,
-              ToastAndroid.CENTER
-          );
-      } catch (error) {
-          console.error('Error fetching random message:', error);
-      }
+        Alert.alert('Success', 'Registration Successful!');
       }
     } catch (error) {
       // Handle error
@@ -63,7 +41,6 @@ const RegistrationScreen = (): React.JSX.Element => {
       Alert.alert('Error', 'Registration failed. Please try again.');
     }
   };
-
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={backgroundStyle.backgroundColor} />
@@ -74,9 +51,7 @@ const RegistrationScreen = (): React.JSX.Element => {
             source={require('./assets/Logo.png')} 
             style={styles.logo}
           />
-
           <Text style={[styles.title]}>Register</Text>
-
           {/* Username Input */}
           <TextInput
             style={[styles.input, { backgroundColor: isDarkMode ? Colors.black : Colors.white }]}
@@ -85,7 +60,6 @@ const RegistrationScreen = (): React.JSX.Element => {
             value={username}
             onChangeText={setUsername}
           />
-
           {/* Email Input */}
           <TextInput
             style={[styles.input, { backgroundColor: isDarkMode ? Colors.black : Colors.white }]}
@@ -95,7 +69,6 @@ const RegistrationScreen = (): React.JSX.Element => {
             onChangeText={setEmail}
             keyboardType="email-address"
           />
-
           {/* Password Input */}
           <TextInput
             style={[styles.input, { backgroundColor: isDarkMode ? Colors.black : Colors.white }]}
@@ -105,7 +78,6 @@ const RegistrationScreen = (): React.JSX.Element => {
             onChangeText={setPassword}
             secureTextEntry
           />
-
           {/* Confirm Password Input */}
           <TextInput
             style={[styles.input, { backgroundColor: isDarkMode ? Colors.black : Colors.white }]}
@@ -115,12 +87,10 @@ const RegistrationScreen = (): React.JSX.Element => {
             onChangeText={setConfirmPassword}
             secureTextEntry
           />
-
           {/* Register Button */}
           <TouchableOpacity style={styles.button} onPress={handleRegister}>
             <Text style={styles.buttonText}>Register</Text>
           </TouchableOpacity>
-
           {/* Already have an account link */}
           <View style={styles.alreadyAccountContainer}>
             <Text style={styles.alreadyAccountText}>Already have an account?</Text>
@@ -133,5 +103,4 @@ const RegistrationScreen = (): React.JSX.Element => {
     </SafeAreaView>
   );
 };
-
 export default RegistrationScreen;
