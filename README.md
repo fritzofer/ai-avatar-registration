@@ -45,13 +45,6 @@ This project is designed to provide a comprehensive registration system for an A
    python backend/main.py
    ```
 
-## Future Development
-- **Frontend:**
-  - Web: React JS interface for user registration.
-  - Mobile: React Native interface for user registration.
-- **Enhancements:**
-  - Advanced user interactions and features.
-
 ## Screenshots
 _Add screenshots of the registration system here._
 
